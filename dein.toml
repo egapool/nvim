@@ -1,0 +1,450 @@
+[[plugins]]
+repo ="kristijanhusak/defx-git"
+hook_add = '''
+call defx#custom#column('git', 'indicators', {
+  \ 'Modified'  : '✹',
+  \ 'Staged'    : '✚',
+  \ 'Untracked' : '✭',
+  \ 'Renamed'   : '➜',
+  \ 'Unmerged'  : '═',
+  \ 'Ignored'   : '☒',
+  \ 'Deleted'   : '✖',
+  \ 'Unknown'   : '?'
+  \ })
+'''
+
+[[plugins]]
+repo ='ryanoasis/vim-devicons'
+
+[[plugins]]
+repo ="kristijanhusak/defx-icons"
+
+[[plugins]]
+repo = 'Shougo/defx.nvim'
+depends = ['defx-git', 'defx-icons']
+hook_add = '''
+
+" Defx Start
+"autocmd VimEnter * execute 'Defx'
+
+autocmd FileType defx call s:defx_my_settings()
+function! s:defx_my_settings() abort
+  " Define mappings
+  nnoremap <silent><buffer><expr> <CR>
+  \ defx#do_action('open')
+  nnoremap <silent><buffer><expr> c
+  \ defx#do_action('copy')
+  nnoremap <silent><buffer><expr> m
+  \ defx#do_action('move')
+  nnoremap <silent><buffer><expr> p
+  \ defx#do_action('paste')
+  nnoremap <silent><buffer><expr> l
+  \ defx#do_action('open')
+  nnoremap <silent><buffer><expr> E
+  \ defx#do_action('open', 'vsplit')
+  nnoremap <silent><buffer><expr> P
+  \ defx#do_action('preview')
+  nnoremap <silent><buffer><expr> o
+  \ defx#do_action('open_tree', 'toggle')
+  nnoremap <silent><buffer><expr> K
+  \ defx#do_action('new_directory')
+  nnoremap <silent><buffer><expr> N
+  \ defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> M
+  \ defx#do_action('new_multiple_files')
+  nnoremap <silent><buffer><expr> C
+  \ defx#do_action('toggle_columns',
+  \                'mark:indent:icon:filename:type:size:time')
+  nnoremap <silent><buffer><expr> S
+  \ defx#do_action('toggle_sort', 'time')
+  nnoremap <silent><buffer><expr> d
+  \ defx#do_action('remove')
+  nnoremap <silent><buffer><expr> r
+  \ defx#do_action('rename')
+  nnoremap <silent><buffer><expr> !
+  \ defx#do_action('execute_command')
+  nnoremap <silent><buffer><expr> x
+  \ defx#do_action('execute_system')
+  nnoremap <silent><buffer><expr> yy
+  \ defx#do_action('yank_path')
+  nnoremap <silent><buffer><expr> .
+  \ defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> ;
+  \ defx#do_action('repeat')
+  nnoremap <silent><buffer><expr> h
+  \ defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> ~
+  \ defx#do_action('cd')
+  nnoremap <silent><buffer><expr> q
+  \ defx#do_action('quit')
+  nnoremap <silent><buffer><expr> <Space>
+  \ defx#do_action('toggle_select') . 'j'
+  nnoremap <silent><buffer><expr> *
+  \ defx#do_action('toggle_select_all')
+  nnoremap <silent><buffer><expr> j
+  \ line('.') == line('$') ? 'gg' : 'j'
+  nnoremap <silent><buffer><expr> k
+  \ line('.') == 1 ? 'G' : 'k'
+  nnoremap <silent><buffer><expr> <C-l>
+  \ defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> <C-g>
+  \ defx#do_action('print')
+  nnoremap <silent><buffer><expr> cd
+  \ defx#do_action('change_vim_cwd')
+endfunction
+
+call defx#custom#option('_', {
+      \ 'winwidth': 40,
+      \ 'split': 'no',
+      \ 'direction': 'topleft',
+      \ 'show_ignored_files': 1,
+      \ 'buffer_name': 'exlorer',
+      \ 'toggle': 1,
+      \ 'resume': 1,
+      \ 'columns': 'indent:git:icons:filename:mark',
+      \ })
+autocmd BufWritePost * call defx#redraw()
+autocmd BufEnter * call defx#redraw()
+" Defx End
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+depends = 'async.vim'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+depends = 'vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-icons'
+depends = 'vim-lsp'
+
+[[plugins]]
+repo = 'morhetz/gruvbox'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+depends = ['/vim-airline-themes']
+hook_add='''
+let g:airline_powerline_fonts = 1
+
+" for bling/vim-airline {{{
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline#extensions#tabline#enabled = 1
+"let g:airline_section_a = airline#section#create(['mode','','branch'])
+let g:airline#extensions#branch#enabled=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:Powerline_symbols = 'fancy'
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+hook_add='''
+let g:airline_theme='gruvbox'
+'''
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+ 
+###fzf.vim
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+hook_add = '''
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_completeopt = 1
+let g:asyncomplete_popup_delay = 200
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-file.vim'
+depends = 'asyncomplete.vim'
+hook_source = '''
+  au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+      \ 'name': 'file',
+      \ 'priority': 3,
+      \ 'allowlist': ['*'],
+      \ 'completor': function('asyncomplete#sources#file#completor'),
+      \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-buffer.vim'
+depends = 'asyncomplete.vim'
+hook_add = '''
+  au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+      \ 'name': 'buffer',
+      \ 'priority': 4,
+      \ 'allowlist': ['*'],
+      \ 'blocklist': ['go'],
+      \ 'completor': function('asyncomplete#sources#buffer#completor'),
+      \ 'config': {
+      \    'max_buffer_size': 5000000,
+      \  },
+      \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-tags.vim'
+depends = 'asyncomplete.vim'
+hook_add = '''
+  au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
+      \ 'name': 'tags',
+      \ 'priority': 5,
+      \ 'allowlist': ['c'],
+      \ 'completor': function('asyncomplete#sources#tags#completor'),
+      \ 'config': {
+      \    'max_file_size': 300000000,
+      \  },
+      \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-necosyntax.vim'
+depends = ['neco-syntax']
+hook_source = '''
+  au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necosyntax#get_source_options({
+      \ 'name': 'necosyntax',
+      \ 'priority': 7,
+      \ 'allowlist': ['*'],
+      \ 'completor': function('asyncomplete#sources#necosyntax#completor'),
+      \ }))
+'''
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+
+[[plugins]]
+repo = 'Shougo/neoinclude.vim'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+hook_add = '''
+    vnoremap ? :'<,'>TComment<CR>
+'''
+
+[[plugins]]
+repo = 'luochen1990/rainbow'
+hook_add = '''
+    let g:rainbow_active = 1
+'''
+
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+hook_add = '''
+    map <Leader> <Plug>(easymotion-prefix)
+    nmap <Leader>w <Plug>(easymotion-jumptoanywhere)
+    nmap <Leader>jk <Plug>(easymotion-sol-bd-jk)
+    nmap <Leader>s <Plug>(easymotion-s2)
+'''
+
+[[plugins]]
+repo = 'simeji/winresizer'
+
+
+[[plugins]]
+repo = 'vim-vdebug/vdebug'
+hook_add = '''
+let g:vdebug_options = {
+    \   '"port' : 9000,
+    \    'break_on_open' : 0,
+    \    'ide_key' : '',
+    \}
+'''
+
+[[plugins]]
+repo = 'mattn/vim-goimports'
+
+[[plugins]]
+repo = 'kassio/neoterm'
+hook_add = '''
+	let g:neoterm_autoinsert = 1
+	let g:neoterm_autoscroll = 1
+	" # let g:neoterm_split_on_tnew = 1
+	let g:neoterm_default_mod = "belowright"
+
+	function! NTermInNewTab()
+		let l:tmp = g:neoterm_default_mod
+		let g:neoterm_default_mod = "tab"
+		Tnew
+		let g:neoterm_default_mod = l:tmp
+	endfunction
+
+	function! NTermCurrentDir()
+		let l:cmd = "cd " .expand("%:p:h")
+		call neoterm#exec({ 'cmd': [ cmd , '' ] })
+		Topen
+	endfunction
+
+	function! NTermCMake()
+		let l:cmd = "cd " .expand("%:p:h")
+		let l:cmd = l:cmd . " && source ~/.config/nvim/scripts/AutoCMake.sh"
+		call neoterm#exec({ 'cmd': [ cmd , '' ] })
+		Topen
+	endfunction
+
+	function! NTermCatkinMake()
+		let l:cmd = "roscd"
+		let l:cmd = l:cmd . " && catkin_make"
+		call neoterm#exec({ 'cmd': [ cmd , '' ] })
+		Topen
+	endfunction
+
+	function! NTermPython( ... )
+		if expand("%:e") != 'py'
+			echo '[error] Invalid file extension.'
+			return
+		endif
+		let l:cmd = "python " .expand("%:p")
+		for arg in a:000
+			let l:cmd = l:cmd . " " . arg
+			"let l:cmd.cmd = [ l:cmd.cmd, arg ]
+		endfor
+		call neoterm#exec({ 'cmd': [ cmd ] })
+		"T python l:cmd
+		Topen
+	endfunction
+
+	function! NTermTexCompile()
+		if expand("%:e") != 'tex'
+			echo '[error] Invalid file extension.'
+			return
+		endif
+		let l:cmd = "cd " .expand("%:p:h")
+		let l:cmd = l:cmd . " && platex " . expand("%:p")
+		let l:cmd = l:cmd . " && dvipdfmx " . expand("%:p:r") . ".dvi"
+		call neoterm#exec({ 'cmd': [ cmd , '' ] })
+		Topen
+	endfunction
+
+	function! GitPush( comment )
+		let l:cmd = "cd " .expand("%:p:h")
+		let l:cmd = l:cmd . " && source ~/.config/nvim/scripts/GitPush.sh " . a:comment
+		call neoterm#exec({ 'cmd': [ cmd , '' ] })
+		Topen
+	endfunction
+
+	function! UpdateConfig()
+		let l:cmd = "cd ~/.config/nvim"
+		let l:cmd = l:cmd . " && git pull"
+		call neoterm#exec({ 'cmd': [ cmd , '' ] })
+		Topen
+		" execute "source ~/.config/nvim/init.vim"
+	endfunction
+
+	function! NTermMulti( v_num, h_num )
+		let l:tmp = g:neoterm_default_mod
+		let g:neoterm_default_mod = "tab"
+		Tnew
+		" # vertical split
+		let g:neoterm_default_mod = "vertical"
+		for i in range( a:h_num - 1 )
+			Tnew
+		endfor
+		" # holizontal split
+		let g:neoterm_default_mod = "aboveleft"
+		for i in range( a:h_num )
+			for i in range( a:v_num - 1 )
+				Tnew
+			endfor
+			" # move to left window
+			execute "winc l"
+		endfor
+		" # move to top-left window
+		execute "winc t"
+		let g:neoterm_default_mod = l:tmp
+	endfunction
+
+	function! NTermHolizontalSplit()
+		let l:tmp = g:neoterm_default_mod
+		let g:neoterm_default_mod = "aboveleft"
+		Tnew
+		let g:neoterm_default_mod = l:tmp
+	endfunction
+
+	function! NTermVerticalSplit()
+		let l:tmp = g:neoterm_default_mod
+		let g:neoterm_default_mod = "botright vertical"
+        Tnew
+		let g:neoterm_default_mod = l:tmp
+	endfunction
+
+	function! NTermVerticalSplitAndTig()
+		let l:tmp = g:neoterm_default_mod
+		let g:neoterm_default_mod = "botright vertical"
+		Texec tig status
+        Topen
+		let g:neoterm_default_mod = l:tmp
+	endfunction
+
+	nnoremap <silent> <c-t><c-t> :Ttoggle<CR>
+	tnoremap <silent> <c-t><c-t> <C-\><C-n>:Ttoggle<CR>
+	nnoremap <c-t><c-h> :call NTermHolizontalSplit()<CR>
+	nnoremap <c-t><c-v> :call NTermVerticalSplit()<CR>
+	nnoremap <c-t><c-g> :call NTermVerticalSplitAndTig()<CR>
+    tnoremap <silent> <ESC> <C-\><C-n>
+
+	command! CMake                call NTermCMake()
+	command! CatkinMake           call NTermCatkinMake()
+	command! -nargs=* Python      call NTermPython(<f-args>)
+	"command! -nargs=* Python      :T python %:p <f-args>
+	command! TexCompile           call NTermTexCompile()
+	command! UpdateConfig         call UpdateConfig()
+	command! -nargs=1 GitPush     call GitPush(<f-args>)
+	command! -nargs=+ NTermMulti  call NTermMulti(<f-args>)
+	command! NTermMulti4          call NTermMulti(2,2)
+	command! NTermMulti6          call NTermMulti(3,2)
+	command! NTermMulti8          call NTermMulti(4,2)
+'''
