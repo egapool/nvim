@@ -80,23 +80,35 @@ map sl <C-w>l
 nmap j gj
 nmap k gk
 
+"Paste in visual mode without copying
+xnoremap p pgvy:w<cr>
+
 " LSP
 nmap <silent> gd :LspDefinition<CR>
 nmap <silent> gt :tab split<cr>:LspDefinition<cr>
 nmap <silent> gs :sp<cr>:LspDefinition<cr>
 nmap <silent> gv :vsp<cr>:LspDefinition<cr>
+nmap <silent> gh :LspPeekDefinition<cr>
 nmap <silent> K :LspHover<CR>
 nmap <silent> <f2> :LspRename<CR>
+nmap <silent> <Leader>a :LspCodeAction<CR>
 nmap <silent> <Leader>d :LspTypeDefinition<CR>
 nmap <silent> <Leader>r :LspReferences<CR>
 nmap <silent> <Leader>i :LspImplementation<CR>
 let g:lsp_preview_max_height = 100
 let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
-let g:asyncomplete_popup_delay = 200
+let g:asyncomplete_popup_delay = 100
 let g:lsp_text_edit_enabled = 1
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_auto_completeopt = 1
+let g:markdown_fenced_languages = ['go', 'rust', 'php']
+let g:markdown_syntax_conceal = 1
+let g:lsp_hover_conceal=1
+let g:vim_markdown_conceal = 1
+let g:vim_markdown_conceal_code_blocks = 1
+let lsp_log_verbose=0
+let lsp_log_file = '/tmp/lsp.log'
 
 " fzf
 nnoremap [Fzf] <Nop>
@@ -114,3 +126,92 @@ nmap <Leader>jk <Plug>(easymotion-sol-bd-jk)
 " nmap <Leader>s <Plug>(easymotion-s2)
 "
 nmap <leader>ve :VdebugEval
+
+"LSP wordpress
+let g:lsp_settings = {
+      \   'intelephense': {
+      \     'workspace_config': {
+      \       'intelephense': {
+      \         'stubs': [
+      \           "wordpress",
+      \           "apache",
+      \           "bcmath",
+      \           "bz2",
+      \           "calendar",
+      \           "com_dotnet",
+      \           "Core",
+      \           "csprng",
+      \           "ctype",
+      \           "curl",
+      \           "date",
+      \           "dba",
+      \           "dom",
+      \           "enchant",
+      \           "exif",
+      \           "fileinfo",
+      \           "filter",
+      \           "fpm",
+      \           "ftp",
+      \           "gd",
+      \           "hash",
+      \           "iconv",
+      \           "imap",
+      \           "interbase",
+      \           "intl",
+      \           "json",
+      \           "ldap",
+      \           "libxml",
+      \           "mbstring",
+      \           "mcrypt",
+      \           "mssql",
+      \           "mysql",
+      \           "mysqli",
+      \           "oci8",
+      \           "odcb",
+      \           "openssl",
+      \           "password",
+      \           "pcntl",
+      \           "pcre",
+      \           "PDO",
+      \           "pdo_ibm",
+      \           "pdo_mysql",
+      \           "pdo_pgsql",
+      \           "pdo_sqlite",
+      \           "pgsql",
+      \           "Phar",
+      \           "posix",
+      \           "pspell",
+      \           "readline",
+      \           "recode",
+      \           "Reflection",
+      \           "regex",
+      \           "session",
+      \           "shmop",
+      \           "SimpleXML",
+      \           "snmp",
+      \           "soap",
+      \           "sockets",
+      \           "sodium",
+      \           "SPL",
+      \           "sqlite3",
+      \           "standard",
+      \           "superglobals",
+      \           "sybase",
+      \           "sysvmsg",
+      \           "sysvsem",
+      \           "sysvshm",
+      \           "tidy",
+      \           "tokenizer",
+      \           "wddx",
+      \           "xml",
+      \           "xmlreader",
+      \           "xmlrpc",
+      \           "xmlwriter",
+      \           "Zend OPcache",
+      \           "zip",
+      \           "zlib"
+      \         ]
+      \       }
+      \     }
+      \   }
+      \ }

@@ -1,4 +1,15 @@
 [[plugins]]
+repo = 'vim-scripts/vim-auto-save'
+hook_add = '''
+let g:auto_save = 1
+let g:auto_save_in_insert_mode = 0
+let g:auto_save_silent = 1
+'''
+
+[[plugins]]
+repo = "sebdah/vim-delve"
+
+[[plugins]]
 repo ="kristijanhusak/defx-git"
 hook_add = '''
 call defx#custom#column('git', 'indicators', {
@@ -225,7 +236,6 @@ hook_add = '''
       \ 'name': 'buffer',
       \ 'priority': 4,
       \ 'allowlist': ['*'],
-      \ 'blocklist': ['go'],
       \ 'completor': function('asyncomplete#sources#buffer#completor'),
       \ 'config': {
       \    'max_buffer_size': 5000000,
@@ -448,3 +458,16 @@ hook_add = '''
 	command! NTermMulti6          call NTermMulti(3,2)
 	command! NTermMulti8          call NTermMulti(4,2)
 '''
+
+[[plugins]]
+repo = 'SirVer/ultisnips'
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+[[plugins]]
+repo = 'thomasfaingnaert/vim-lsp-snippets'
+
+[[plugins]]
+repo = 'thomasfaingnaert/vim-lsp-ultisnips'
+
