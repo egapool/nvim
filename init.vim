@@ -59,6 +59,9 @@ nnoremap <silent> <ESC><ESC> :nohlsearch<CR> " <ESC>連打で検索ハイライ�
 nmap ss :split<Return><C-w>w
 nmap sv :vsplit<Return><C-w>w
 
+" fileを閉じる
+nmap <C-D> :wq<CR>
+
 " クオーテーションの補完
 inoremap ' ''<LEFT>
 inoremap " ""<LEFT>
