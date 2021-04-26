@@ -130,6 +130,9 @@ nmap <Leader>jk <Plug>(easymotion-sol-bd-jk)
 "
 nmap <leader>ve :VdebugEval
 
+autocmd FileType go nmap <F10> :DlvToggleBreakpoint<CR>
+autocmd FileType go nmap <F5> :DlvDebug<CR>
+
 "LSP wordpress
 let g:lsp_settings = {
       \   'intelephense': {
@@ -218,3 +221,9 @@ let g:lsp_settings = {
       \     }
       \   }
       \ }
+
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
+highlight Folded ctermbg=none
+highlight EndOfBuffer ctermbg=none

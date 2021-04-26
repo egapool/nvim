@@ -471,3 +471,5 @@ repo = 'thomasfaingnaert/vim-lsp-snippets'
 [[plugins]]
 repo = 'thomasfaingnaert/vim-lsp-ultisnips'
 
+[[plugins]]
+repo = 'mattn/emmet-vim'
